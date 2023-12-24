@@ -71,12 +71,13 @@ func (h MessageHook) Run(e *zerolog.Event, l zerolog.Level, msg string) {
 func ExampleLogger_Hook() {
 	var levelNameHook LevelNameHook
 	var messageHook MessageHook = "The message"
+	var messageHook1 MessageHook = "The message1"
 
-	log := zerolog.New(os.Stdout).Hook(levelNameHook, messageHook)
+	log := zerolog.New(os.Stdout).Hook(levelNameHook, messageHook).Hook(messageHook1)
 
 	log.Info().Msg("hello world")
 
-	// Output: {"level":"info","level_name":"info","the_message":"hello world","message":"hello world"}
+	// Output: {"level":"info","level_name":"info","the_message":"hello world","the_message":"hello world","message":"hello world"}
 }
 
 func ExampleLogger_Print() {
